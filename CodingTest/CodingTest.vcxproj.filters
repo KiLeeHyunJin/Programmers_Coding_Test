@@ -28,6 +28,12 @@
     <ClCompile Include="비밀코드해독.cpp">
       <Filter>Base</Filter>
     </ClCompile>
+    <ClCompile Include="지게차와크레인.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="서버증설횟수.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Base">

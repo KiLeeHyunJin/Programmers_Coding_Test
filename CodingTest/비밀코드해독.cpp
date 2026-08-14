@@ -24,11 +24,82 @@ int main()
     cout << answer << endl;
 }
 
+int BackTracking(vector<int>& q, vector<int>& ans,int range, int passSize, int index, vector<int>* out)
+{
+    if (index > range)
+        return 0;
+
+    int stackCount = 0;
+    for (size_t i = index; i <= range; i++)
+    {
+        bool isJump = false;
+        vector<int> removePasswordIndex;
+        removePasswordIndex.reserve(ans.size());
+
+        int clearCheck = 0;
+        for (size_t j = 0; j < q.size(); j++)
+        {
+            if (0 != (q[j] & (1 << i)))
+            {
+                q[j] &= ~(1 << i);
+                ans[j]--;
+                removePasswordIndex.push_back(j);
+
+                if (isJump = (ans[j]) < 0)
+                    break;
+            }
+
+            if (ans[j] == 0)
+                clearCheck++;
+        }
+       
+        out->push_back(i);
+        if (isJump == false)
+        {
+            int curSize = out->size();
+            if (clearCheck == q.size() && curSize == passSize)
+                stackCount++;
+            else if(curSize < passSize)
+                stackCount += BackTracking(q, ans, range, passSize, i + 1, out);
+        }
+
+        out->pop_back();
+        
+        for (auto removeAns : removePasswordIndex)
+        {
+            ans[removeAns]++;
+            q[removeAns] |= 1 << i;
+        }
+    }
+    return stackCount;
+}
+
 int solution(int n, vector<vector<int>> q, vector<int> ans) 
 {
-    int answer = 0;
+    
+    const int keySize = q.front().size();
+    set<int> usedNum;
+    unsigned int flags = 0;
+    for (const auto& inputNums : q)
+        for (int num : inputNums)
+            usedNum.insert(num).second;
+
+    vector<int> nums;
+    nums.reserve(usedNum.size());
+    for (auto num : usedNum)
+        nums.push_back(num);
+    usedNum.clear();
+
+    vector<int> inputPass(q.size(), 0);
+    for (size_t i = 0; i < q.size(); i++)
+        for (size_t j = 0; j < keySize; j++)
+            inputPass[i] |= 1 << q[i][j];
 
 
+    vector<int> selectNums;
+    selectNums.reserve(keySize);
 
-    return answer;
+
+    return BackTracking(inputPass, ans,n, keySize,
+        1 , & selectNums);
 }
