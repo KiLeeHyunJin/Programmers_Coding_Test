@@ -31,10 +31,10 @@
     <ClCompile Include="택배상자꺼내기.cpp">
       <Filter>Base\Clear</Filter>
     </ClCompile>
-    <ClCompile Include="연속된부분수열의합.cpp">
-      <Filter>Base</Filter>
-    </ClCompile>
     <ClCompile Include="서버증설횟수.cpp">
+      <Filter>Base\Clear</Filter>
+    </ClCompile>
+    <ClCompile Include="연속된부분수열의합.cpp">
       <Filter>Base\Clear</Filter>
     </ClCompile>
   </ItemGroup>

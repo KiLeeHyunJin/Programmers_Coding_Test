@@ -5,30 +5,51 @@
 #include <iostream>
 
 //비내림차순으로 정렬
+//시간 복잡도 2N
 using namespace std;
 vector<int> solution(vector<int> sequence, int k) {
-    vector<int> sums(sequence.size(), 0);
     vector<int> answer(2, 0);
     int size = sequence.size();
-    for (int i = 0; i < sequence.size(); i++)
+    int sum = 0;
+    int start = 0;
+    int end = 0;
+    int min = size + 2;
+    //N회 반복 순회로 연속합 계산
+    for (size_t i = 0; i < size; i++)
     {
-        int value = 0;
-        int curSize = 0;
-        for (int j = i; j < sequence.size(); j++)
+        sum += sequence[i];
+        //뒷부분 피봇 이동
+        end = i + 1;
+        
+        if (sum < k)
+            continue;
+
+        if (sum == k)
         {
-            curSize++;
-            value += sequence[j];
-            if (value > k)
-                break;
-            if (value == k)
+            //사용된 조합 수가 적다면 시작점과 끝점 저장 
+            if (min > (end - start) + 1)
             {
-                if (size > curSize)
-                {
-                    size = curSize;
-                    answer[0] = i;
-                    answer[1] = j;
-                }
-                break;
+                min = (end - start) + 1;
+                answer[0] = start;
+                answer[1] = end - 1;
+           }
+            continue;
+        }
+
+        //N회 반복해서 앞 부분 제거
+        while (sum > k)
+        {
+            sum -= sequence[start];
+            start++; //앞 부분 피봇 이동
+        }
+        if (sum == k)
+        {
+            //사용된 조합 수가 적다면 시작점과 끝점 저장 
+            if (min > (end - start) + 1)
+            {
+                min = (end - start) + 1;
+                answer[0] = start;
+                answer[1] = end - 1;
             }
         }
     }
