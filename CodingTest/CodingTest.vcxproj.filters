@@ -37,6 +37,9 @@
     <ClCompile Include="연속된부분수열의합.cpp">
       <Filter>Base\Clear</Filter>
     </ClCompile>
+    <ClCompile Include="퍼즐게임챌린지.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Base">

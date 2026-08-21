@@ -175,6 +175,7 @@
     <ClCompile Include="택배상자꺼내기.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="퍼즐게임챌린지.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Call.h" />
